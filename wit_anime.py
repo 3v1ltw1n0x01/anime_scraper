@@ -26,7 +26,6 @@ class WitAnime:
                 "download_links": self.get_episode_dl(item.select("h3 > a")[0]["href"]),
             }
             episodes.append(episode)
-            break
         return episodes
 
     def _extract_results(self, items):
