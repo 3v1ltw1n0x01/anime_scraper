@@ -21,7 +21,7 @@ class WitAnime:
                 "episode": item.select("h3 > a")[0].text,
                 "alt": item.select(".img-responsive")[0]["alt"],
                 "src": item.select(".img-responsive")[0]["src"],
-                "anime_url": card_title[0]["href"],
+                "anime_url": card_title[0]["href"] if card_title else "",
                 "episode_url": item.select("h3 > a")[0]["href"],
                 "download_links": self.get_episode_dl(item.select("h3 > a")[0]["href"]),
             }
@@ -55,8 +55,9 @@ class WitAnime:
         items = soup.select(".episodes-card")
         return json.dumps(self._extract_episodes(items), ensure_ascii=False)
 
-    def get_episode_dl(self, ep_url):
-        soup = self._get_soup(ep_url)
+    def get_episode_dl(self, ep_id):
+        url = f"{self.server}/episode/{ep_id}"
+        soup = self._get_soup(url)
         items = soup.select('a.btn.btn-default[href*="drive.google.com"]')
         episodes = [item["href"] for item in items]
         return episodes
