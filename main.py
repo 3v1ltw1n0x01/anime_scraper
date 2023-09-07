@@ -1,8 +1,7 @@
-from flask import Flask, request, jsonify
-from wit_anime import WitAnime
+from flask import Flask
+import wit_anime as wit
 
 
-wit = WitAnime()
 app = Flask(__name__)
 
 
@@ -43,4 +42,4 @@ def get_anime_info(s_id):
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run("0.0.0.0")
